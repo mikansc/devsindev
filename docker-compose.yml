@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - "/app/node_modules"
+      - "./:/app"
+  backend:
+    image: mausampaio/devsindev-api:1.0
+    ports:
+      - 8080:1337
