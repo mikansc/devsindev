@@ -1,4 +1,4 @@
-.header-search {
+div.input-container {
   margin: 0 auto;
   width: 100%;
   display: flex;
@@ -7,12 +7,12 @@
   align-items: center;
 }
 
-.header-search label {
+div.input-container label.input-label {
   margin: 1.5em 0 0.25em;
   align-self: flex-start;
 }
 
-.header-search input {
+div.input-container input.input-text {
   width: 100%;
   max-width: 480px;
   border: 1px solid rgba(0, 0, 0, 0.25);

@@ -1,10 +1,14 @@
 import "./TextInput.styles.css";
 
-const TextInput = ({ label, ...rest }) => {
+const TextInput = ({ label, id, ...rest }) => {
   return (
-    <div className="header-search">
-      {label && <label htmlFor={label}>{label}</label>}
-      <input type="text" {...rest} />
+    <div className="input-container">
+      {label && (
+        <label className="input-label" htmlFor={id}>
+          {label}
+        </label>
+      )}
+      <input className="input-text" type="text" id={id} {...rest} />
     </div>
   );
 };
