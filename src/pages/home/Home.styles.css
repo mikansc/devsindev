@@ -1,22 +1,17 @@
 .header {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   padding: 0.5em 1.5em;
   border-bottom: 1px solid rgba(0, 0, 0, 0.25);
 }
 
-.header-search input {
-  width: 480px;
-  border: 1px solid rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
-  outline: none;
-  padding: 0.8em 1em;
-  font-size: inherit;
-  color: inherit;
+@media screen and (max-width: 600px) {
+  .header-logo img {
+    width: 100px;
+  }
 }
-
 .container {
   width: 80%;
   margin: 2em auto;
