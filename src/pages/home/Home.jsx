@@ -7,14 +7,15 @@ import Modal from "./Modal";
 import StudentCard from "./StudentCard";
 import TextInput from "../../components/TextInput/TextInput";
 
-import "./Home.styles.css";
 import Button from "../../components/Button/Button";
 import useForm from "../../hooks/useForm";
+
+import "./Home.styles.css";
 
 const Home = () => {
   const [alunos, setAlunos] = useState([]);
   const [openModal, setOpenModal] = useState(false);
-  const [field, setFieldValue] = useForm({
+  const [data, setFieldValue] = useForm({
     nome: "",
     idade: "",
     github: "",
@@ -37,13 +38,9 @@ const Home = () => {
   };
 
   const handleSave = () => {
-    const { nome, idade, github, linkedin } = field;
-    console.log("Save", {
-      nome,
-      idade,
-      github,
-      linkedin,
-    });
+    axios.post("http://localhost:8080/v1/usuarios", data);
+    setAlunos([...alunos, data]);
+    setOpenModal(false);
   };
 
   return (
@@ -52,7 +49,9 @@ const Home = () => {
         <div className="header-logo">
           <img src={Logo} alt="DevInHouse" />
         </div>
-        <TextInput placeholder="Buscar aluno..." />
+        <div className="search-input">
+          <TextInput placeholder="Buscar aluno..." />
+        </div>
         <div className="header-add">
           <button onClick={handleOpenModal}>
             <img src={AddStudentButton} alt="Adicionar" />
@@ -60,35 +59,40 @@ const Home = () => {
         </div>
       </header>
       <div className="container">
-        {alunos.length === 0 ? (
-          <p>Nenhum aluno encontrado.</p>
-        ) : (
-          alunos.map((aluno) => <StudentCard key={aluno.id} student={aluno} />)
-        )}
+        <div className="content">
+          {alunos.length === 0 ? (
+            <p>Nenhum aluno encontrado.</p>
+          ) : (
+            alunos.map((aluno) => (
+              <StudentCard key={aluno.id} student={aluno} />
+            ))
+          )}
+        </div>
       </div>
       <Modal title="Novo aluno" open={openModal} onClose={handleCloseModal}>
         <TextInput
           label="Nome"
           placeholder="Digite o nome"
-          value={field.nome}
+          value={data.nome}
           onChange={(e) => setFieldValue("nome", e.target.value)}
         />
         <TextInput
+          type="number"
           label="Idade"
           placeholder="Digite a idade"
-          value={field.idade}
+          value={data.idade}
           onChange={(e) => setFieldValue("idade", e.target.value)}
         />
         <TextInput
           label="LinkedIn"
-          placeholder="Digite a url do linkedin"
-          value={field.linkedin}
+          placeholder="https://linkedin.com/in/..."
+          value={data.linkedin}
           onChange={(e) => setFieldValue("linkedin", e.target.value)}
         />
         <TextInput
           label="Github"
-          placeholder="Digite a url do github"
-          value={field.github}
+          placeholder="https://github.com/..."
+          value={data.github}
           onChange={(e) => setFieldValue("github", e.target.value)}
         />
         <Button label="Salvar" onClick={handleSave} />
