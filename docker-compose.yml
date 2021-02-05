@@ -10,6 +10,14 @@ services:
       - "/app/node_modules"
       - "./:/app"
   backend:
-    image: mausampaio/devsindev-api:1.0
+    image: mausampaio/devsindev-api:latest
     ports:
       - 8080:1337
+  seed:
+    depends_on:
+      - backend
+    image: mausampaio/devsindev-seed:latest
+    environment:
+      SAILS_PORT: 1337
+      SAILS_HOST: backend
+      WAIT_HOSTS: backend:1337
