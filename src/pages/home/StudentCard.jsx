@@ -5,7 +5,7 @@ const StudentCard = ({ student, onClick }) => {
   return (
     <div className="card" onClick={onClick && onClick}>
       <div className="column-left">
-        <img src={`${student.foto?.url}`} alt="Imagem" />
+        <img className="avatar" src={`${student.foto?.url}`} alt="Imagem" />
       </div>
       <div className="column-right">
         <div className="card-data">
