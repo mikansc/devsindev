@@ -15,7 +15,7 @@ import "./Home.styles.css";
 const Home = () => {
   const [alunos, setAlunos] = useState([]);
   const [openModal, setOpenModal] = useState(false);
-  const [data, setFieldValue] = useForm({
+  const [data, setFieldValue, resetData] = useForm({
     nome: "",
     idade: "",
     github: "",
@@ -40,6 +40,7 @@ const Home = () => {
   const handleSave = () => {
     axios.post("http://localhost:8080/v1/usuarios", data);
     setAlunos([...alunos, data]);
+    resetData();
     setOpenModal(false);
   };
 
